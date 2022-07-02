@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../../Context";
 
-const ProductCard = ({
-  id,
-  title,
-  price,
-  description,
-  category,
-  image,
-  rating,
-}) => {
+const ProductCard = (product) => {
+  const { addProductToCart } = useContext(Context);
+  const handleAddProductToCart = () => {
+    addProductToCart(product);
+  };
+
   return (
     <div className="flex h-96 w-10/12 flex-col space-y-2 lg:w-3/12 lg:py-4 relative">
-      <button className="absolute w-12 h-12 top-2 right-2 p-1 rounded-full overflow-hidden bg-black">
+      <button
+        onClick={handleAddProductToCart}
+        className="absolute w-12 h-12 top-2 right-2 p-1 rounded-full overflow-hidden bg-black"
+      >
         <svg viewBox="0 0 172 172">
           <g
             fill="none"
@@ -34,18 +35,18 @@ const ProductCard = ({
       </button>
       <div className="h-full border-b-2 bg-gradient-to-b from-black to-stone-900 overflow-auto">
         <img
-          src={image}
-          alt={description}
+          src={product.image}
+          alt={product.description}
           className="h-full w-full object-cover object-top"
         />
       </div>
       <div className="flex justify-between text-xl font-black text-white">
-        <p>{title}</p>
+        <p>{product.title}</p>
         <p>
           {Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "USD",
-          }).format(price)}
+          }).format(product.price)}
         </p>
       </div>
     </div>
