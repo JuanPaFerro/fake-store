@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../../Context";
 
-const CartCard = (data) => {
-  const product = data.data;
+const CartCard = ({product}) => {
   const { addProductToCart, removeProductFromCart } = useContext(Context);
   const handleAddProduct = () => {
     addProductToCart(product);
